@@ -1,0 +1,209 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+% \usepackage[utf8]{inputenc} is no longer required (since 2018)
+
+\usepackage{fontspec,xgreek,polyglossia}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\newfontfamily{\greekfont}{CMU Serif}
+\newfontfamily{\greekfontsf}{CMU Sans Serif}
+\usepackage{polyglossia}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setdefaultlanguage{greek}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Θεώρημα}[section]
+\newtheorem{corollary}{Πόρισμα}[theorem]
+\newtheorem{lemma}[theorem]{Λήμμα}
+\newtheorem{definition}{Ορισμός}[section]
+
+\newcommand{\stcomp}[1]{#1^{\mathsf{c}}}
+
+\begin{document}
+
+\section{Άσκηση 1}
+
+\begin{proof}
+Έστω  $\mathcal{F} = \{ (A_1 \cap B) \cup (A_2 \setminus B)\colon A_1, A_2 \in \mathcal{A} \}$. 
+
+\noindent\textbf{Ισχυρισμός:} Η $\mathcal{F}$ είναι σ-άλγεβρα.
+
+\begin{enumerate}
+\item Παρατηρούμε ότι $X \in \mathcal{A} \subseteq \mathcal{F}$.
+\item Έστω αυθαίρετο $A = (A_1 \cap B) \cup (A_2 \setminus B) \in \mathcal{F}$ με $A_1, A_2 \in \mathcal{A}$. Τότε
+\begin{align*}
+\stcomp{A} &= (\stcomp{A_1} \cup \stcomp{B}) \cap (B \cup \stcomp{A_2})\\
+           &= (\stcomp{A_1} \cap (B \cup \stcomp{A_2})) \cup (\stcomp{B} \cap (B \cup \stcomp{A_2}))\\
+           &= (\stcomp{A_1} \cap B) \cup (\stcomp{A_1} \cap \stcomp{A_2}) \cup (\stcomp{A_2} \setminus B)\\
+           &= (\stcomp{A_1} \cap B) \cup ((\stcomp{A_1} \cap \stcomp{A_2}) \cap B) \cup ((\stcomp{A_1} \cap \stcomp{A_2}) \setminus B) \cup (\stcomp{A_2} \setminus B)\,.
+\end{align*}
+
+Ονομάζοντας $A_3 = \stcomp{A_1} \cap \stcomp{A_2}$ έχουμε
+\begin{align*}
+\stcomp{A} &= ((\stcomp{A_1} \cup A_3) \cap B) \cup ((A_3 \cup \stcomp{A_2}) \setminus B)\\
+           &= (\stcomp{A_1} \cap B) \cup (\stcomp{A_2} \setminus B)\,.
+\end{align*}
+
+Αφού η $\mathcal{A}$ είναι άλγεβρα άρα $\stcomp{A_1}, \stcomp{A_2} \in \mathcal{A}$ και συνεπώς $\stcomp{A} \in \mathcal{F}$.
+
+\item Έστω αυθαίρετη ακολουθία $(A_i)_{i=1}^\infty$ όπου $A_i = (A^1_i \cap B) \cup (A^2_i \setminus B) \in \mathcal{F}$ με $A^1_i, A^2_i \in \mathcal{A}$ για κάθε $i$. Τότε
+
+\begin{align*}
+    \bigcup_{i=1}^\infty A_i &= \bigcup_{i=1}^\infty (A^1_i \cap B) \cup (A^2_i \setminus B) \\
+                             &= \left(\left(\bigcup_{i=1}^\infty A_i^1\right) \cap B\right) \cup \left(\left(\bigcup_{i=1}^\infty A_i^2\right) \setminus B\right)\,.
+\end{align*}
+
+Αφού η $\mathcal{A}$ είναι σ-άλγεβρα άρα $\bigcup_{i=1}^\infty A^1_i, \bigcup_{i=1}^\infty A^2_i \in \mathcal{A}$, συνεπώς $\bigcup_{i=1}^\infty A_i \in \mathcal{F}$.
+\end{enumerate}
+
+Άρα ο ισχυρισμός ισχύει. Συμπεραίνουμε ότι $\sigma(\mathcal{F}) = \mathcal{F}$.
+
+Έστω τώρα αυθαίρετο $A \in \mathcal{A}$. Τότε $A = (A \cap B) \cup (A \setminus B) \in \mathcal{F}$. Επιπλέον, $B = (X \cap B) \cup (X \setminus B) \in \mathcal{F}$ αφού $X \in \mathcal{A}$. Άρα $\mathcal{A} \cup \{ B \} \subseteq \mathcal{F}$ και συνεπώς $\sigma(\mathcal{A} \cup \{B\}) \subseteq \sigma(\mathcal{F}) = \mathcal{F}$. Επιπλέον $\sigma(\mathcal{F}) = \mathcal{F} \subseteq \sigma(\mathcal{A} \cup \{B\})$, αφού κάθε στοιχείο της $\mathcal{F}$ γράφεται με τους τελεστές ένωσης, τομής, και συμπληρώματος σε στοιχεία της $\mathcal{A} \cup \{ B \}$. Έτσι έχουμε $\sigma(\mathcal{A} \cup \{ B \}) = \mathcal{F}$.
+\end{proof}
+
+\section{Άσκηση 2}
+
+\begin{proof}
+
+Παρατηρούμε ότι κάθε $E \in \mathcal{A}_n$ ικανοποιεί την αντιθετοαντίστροφη ιδιότητα, δηλαδή ότι για κάθε $k \in \mathbb{Z}$, αν υπάρχει $m \in \{0, 1, \ldots, n - 1\}$ τέτοιο ώστε $(kn + m) \not\in E$ τότε για κάθε $s \in \{0, 1, \ldots, n - 1\}$ έχουμε επίσης $(kn + s) \not\in E$.
+
+\begin{enumerate}
+\item $\emptyset \in \mathcal{A}_n$.
+\item Έστω $E \in \mathcal{A}_n$. Έστω κάποια $k \in \mathbb{Z}, s \in \{0, 1, \ldots, n - 1\}$ τέτοια ώστε $(kn + s) \in \stcomp{E}$ και έστω αυθαίρετο $m \in \{0, 1, \ldots, n - 1\}$. Αφού $(kn + s) \not\in E$, άρα από την αντιθετοαντίστροφη ιδιότητα έχουμε $(kn + m) \not\in E$ και συνεπώς $(kn + m) \in \stcomp{E}$. Δηλαδή $\stcomp{E} \in \mathcal{A}_n$.
+\item Έστω αυθαίρετη ακολουθία $(A_n)_{n = 1}^\infty$, $A_n \in \mathcal{A}_n$, και έστω κάποια $k \in \mathbb{Z}, s \in \{0, 1, \ldots, n - 1\}$ τέτοια ώστε $(kn + s) \in \bigcup_{n = 1}^\infty A_n$. Έστω αυθαίρετο $m \in \{0, 1, \ldots, n - 1\}$. Ξέρουμε ότι, για κάποιο $i$, έχουμε $(kn + s) \in A_i$, συνεπώς από την ιδιότητα έχουμε επίσης ότι $(kn + m) \in A_i$ και άρα $(kn + m) \in \bigcup_{n = 1}^\infty A_i$. Δηλαδή $\bigcup_{n = 1}^\infty A_n \in \mathcal{A}_n$.
+\end{enumerate}
+
+Άρα η $\mathcal{A}_n$ είναι σ-άλγεβρα.
+\end{proof}
+
+\section{Άσκηση 3}
+\subsection{3α}
+\begin{proof}
+$ $\newline
+\begin{enumerate}
+\item $\emptyset \in \bigcup_{n = 1}^\infty \mathcal{A}_n$.
+\item Έστω αυθαίρετο $E \in \bigcup_{n = 1}^\infty \mathcal{A}_n$. Τότε υπάρχει $i \in \mathbb{N}$ τέτοιο ώστε $E \in \mathcal{A}_i$. Επειδή η $\mathcal{A}_i$ είναι άλγεβρα, άρα $\stcomp{E} \in \mathcal{A}_i$, συνεπώς $\stcomp{A} \in \bigcup_{n = 1}^\infty \mathcal{A}_n$.
+\item Έστω αυθαίρετη πεπερασμένη ακολουθία $(E_i)_{i = 1}^n$ με $n \in \mathbb{N}$ όπου για κάθε $i$ έχουμε $E_i \in \bigcup_{j = 1}^\infty \mathcal{A}_j$. Για κάθε $i \in \{ 1, 2, \ldots, n \}$ υπάρχει $j$ τέτοιο ώστε $E_i \in \mathcal{A}_j$ και έστω $J$ το σύνολο όλων αυτών των $j$ δεικτών. Αφού το $J$ είναι πεπερασμένο και μη κενό, θέτουμε $k = \max J$. Παρατηρούμε ότι, επειδή η $(\mathcal{A}_n)_{n = 1}^\infty$ είναι αύξουσα, για κάθε $i$ έχουμε $E_i \in \mathcal{A}_k$. Αφού η $\mathcal{A}_k$ είναι άλγεβρα, άρα $\bigcup_{i = 1}^n E_i \in \mathcal{A}_k \subseteq \bigcup_{i=1}^\infty \mathcal{A}_i$.
+\end{enumerate}
+
+Άρα η $\bigcup_{n=1}^\infty A_n$ είναι άλγεβρα.
+\end{proof}
+
+\subsection{3β}
+
+Η οικογένεια $\bigcup_{n = 1}^\infty A_n$ δεν είναι σ-άλγεβρα. Πράγματι, για αντιπαράδειγμα, θεωρήστε $X = \mathbb{N}$ και $\mathcal{A}_n = \mathcal{P}(\{1, 2, \ldots, n\}) \cup \{ \mathbb{N} \setminus A\colon A \in \mathcal{P}(\{1, 2, \ldots, n\})$. Τότε κάθε $\mathcal{A}_n$ είναι σ-άλγεβρα. Παρατηρήστε ότι κάθε στοιχείο της $\bigcup_{n = 1}^\infty \mathcal{A}_n$ είναι πεπερασμένο ή συμπλήρωμα πεπερασμένου. Έστω τώρα η ακολουθία $(B_n)_{n = 1}^\infty$ με $B_n = \{ 2n \} \in \mathcal{A}_{2n} \subseteq \bigcup_{n = 1}^\infty \mathcal{A}_n$. Τότε το $\bigcup_{i = 1}^\infty B_n$ δεν είναι πεπερασμένο ή συμπλήρωμα πεπερασμένου, συνεπώς $\bigcup_{i = 1}^\infty B_n \not\in \bigcup_{n = 1}^\infty \mathcal{A}_n$.
+
+\section{Άσκηση 4}
+
+\subsection{4α}
+
+\begin{lemma}
+$\liminf A_n = \bigcup_{n = 1}^\infty \bigcap_{m = n}^\infty A_n = \{ 0 \}$.
+\end{lemma}
+\begin{proof}
+Έστω αυθαίρετο $x$. Διακρίνουμε περιπτώσεις. Για $x = 0$ έχουμε ότι για κάθε $n$ είναι $x \in A_n$, άρα $x \in \liminf A_n$. Για $x \leq -1$ ή $x \geq 1$, έχουμε ότι για κάθε n είναι $x \not\in A_n$ και άρα $x \not\in \liminf A_n$. Για $-1 < x < 0$, παρατηρούμε ότι για κάθε $n$ υπάρχει $m = \max\{n, -2 \lceil\frac{1}{x}\rceil + 1\} \geq n$ τέτοιο ώστε $x \not\in A_m$ και άρα $x \not\in \liminf A_n$. Αντίστοιχα για $0 < x < 1$, παρατηρούμε ότι για κάθε $n$ υπάρχει $m = \max\{n, 2\lceil\frac{1}{x}\rceil\} \geq n$ τέτοιο ώστε $x \not\in A_m$ και άρα $x \not\in \liminf A_n$.
+\end{proof}
+
+\begin{lemma}
+$\limsup A_n = \bigcap_{n = 1}^\infty \bigcup_{m = n}^\infty A_n = \{0\}$.
+\end{lemma}
+\begin{proof}
+Για τον ίδιο λόγο με την απόδειξη του παραπάνω λήμματος έχουμε $0 \in \limsup A_n$ και για $x < -1$ ή $x > 1$, $x \not\in \limsup A_n$. Για $-1 < x < 0$ παρατηρούμε ότι υπάρχει $n = -2\lceil\frac{1}{x}\rceil + 1$ τέτοιο ώστε για κάθε $m \geq n$ να έχουμε $x \not\in A_n$, και άρα $x \not\in \limsup A_n$. Αντίστοιχα, για $0 < x < 1$ παρατηρούμε ότι υπάρχει $n = 2\lceil\frac{1}{x}$ τέτοιο ώστε για κάθε $m \geq n$ να έχουμε $x \not\in A_n$ και άρα $x \not\in \limsup A_n$.
+\end{proof}
+
+\subsection{4β}
+
+\begin{lemma}
+$f(x) = 1 \Leftrightarrow \liminf_{n \to \infty} \chi_{A_n}(x) = 1$.
+\end{lemma}
+\begin{proof}
+\begin{align*}
+               & f(x) = 1\\
+\Leftrightarrow& x \in \liminf_n A_n\\
+\Leftrightarrow& \exists n: \forall m \geq n: x \in A_m\\
+\Leftrightarrow& \exists n: \forall m \geq n: \chi_{A_m}(x) = 1\\
+\Leftrightarrow& \liminf_{n \to \infty} \chi_{A_n}(x) = 1\,.
+\end{align*}
+\end{proof}
+
+\begin{lemma}
+$g(x) = 1 \Leftrightarrow \limsup_{n \to \infty} \chi_{A_n}(x) = 1$.
+\end{lemma}
+\begin{proof}
+\begin{align*}
+               & g(x) = 1\\
+\Leftrightarrow& x \in \limsup_n A_n\\
+\Leftrightarrow& \forall n: \exists m \geq n: x \in A_m\\
+\Leftrightarrow& \forall n: \exists m \geq n: \chi_{A_m}(x) = 1\\
+\Leftrightarrow& \limsup_{n \to \infty} \chi_{A_n}(x) = 1\,.
+\end{align*}
+\end{proof}
+
+\section{Άσκηση 5}
+\subsection{5α}
+Έστω $\mu: \mathcal{P}(\mathbb{N}) \longrightarrow [0, +\infty]$ η συνάρτηση
+\[
+\mu(A) = \begin{cases}
+    0, \text{ αν $A$ πεπερασμένο με $|A| = n \in \mathbb{N}$,}\\
+    +\infty, \text{ αλλιώς}
+\end{cases}\,.
+\]
+Το $\mu$ είναι πεπερασμένα προσθετικό μέτρο διότι οι πεπερασμένες ενώσεις πεπερασμένων συνόλων είναι πεπερασμένες, αλλά όχι σ-προσθετικό μέτρο, αφού η αριθμήσιμη ένωση πεπερασμένων συνόλων είναι άπειρη.
+
+\subsection{5β}
+
+\begin{proof}
+Αρχικά παρατηρούμε ότι το $\mu$ είναι μονότονο. Πράγματι, για τυχόν $A \subseteq B$ γράφουμε $B = A \cup (B \setminus A)$. Από την πεπερασμένη προσθετικότητα έχουμε $\mu(B) = \mu(A) + \mu(B \setminus A)$ και, αφού $\mu(B \setminus A) \geq 0$, έχουμε $\mu(A) \leq \mu(B)$.
+
+Έστω τώρα ακολουθία $(A_n)_{n = 1}^\infty$ ξένων ανά δύο συνόλων $A_i, A_j \in \mathcal{A}$.
+Έχουμε $\sum_{n = 1}^\infty \mu(A_n) = \lim_{n \to \infty} \sum_{i = 1}^n \mu(A_n) = \lim_{n \to \infty} \mu(\bigcup_{i = 1}^n A_n)$ λόγω της πεπερασμένης προσθετικότητας. Όμως, λόγω μονοτονίας, για κάθε $n$ έχουμε $\mu(\bigcup_{i = 1}^n A_n) \leq \mu(\bigcup_{i = 1}^\infty A_n)$, συνεπώς $\lim_{n \to \infty} \mu(\bigcup_{i = 1}^n A_i) \leq \mu(\bigcup_{i = 1}^\infty A_i)$. Άρα $\sum_{n=1}^\infty \mu(A_n) \leq \mu(\bigcup_{n=1}^\infty A_n)$.
+Από την υποπροσθετικότητα του $\mu$ ξέρουμε και ότι 
+$\mu(\bigcup_{n = 1}^\infty A_n) \leq \sum_{n = 1}^\infty \mu(A_n)$. 
+Άρα $\mu(\bigcup_{n = 1}^\infty A_n) = \sum_{n = 1}^\infty \mu(A_i)$.
+\end{proof}
+
+\section{Άσκηση 6}
+
+\subsection{6α}
+
+\begin{proof}
+Γράφουμε $A \cap B = A \setminus (C \setminus B)$ και υπολογίζουμε ότι $\mu(A \cap B) = \mu(A) - \mu(C \setminus B) = \mu(A) - (\mu(C) - \mu(B)) = \mu(B)$ από υπόθεση, σημειώνοντας ότι όλα τα εν λόγω σύνολα βρίσκονται εντός της $\mathcal{A}$.
+\end{proof}
+
+\subsection{6β}
+
+\begin{proof}
+Γράφουμε $A \triangle B = (A \setminus B) \cup (B \setminus A)$ και παρατηρούμε ότι $B \setminus A \subseteq A \triangle B$. Αφού $\mu(A \triangle B) = 0$, άρα το $B \setminus A$ είναι $\mu$-μηδενικό σύνολο. Εφόσον η $\mathcal{A}$ είναι πλήρης, άρα $B \setminus A \in \mathcal{A}$. Συμπεραίνουμε ότι η $B = (B \setminus A) \cup A \in \mathcal{A}$ καθώς η $\mathcal{A}$ είναι άλγεβρα. Τέλος, $\mu(B) = \mu((B \setminus A) \cup A) = \mu(B \setminus A) + \mu(A) = \mu(B) - \mu(A) + \mu(A) = \mu(B)$.
+\end{proof}
+
+\section{Άσκηση 7}
+\begin{proof}
+Αρχικά $\nu(\emptyset) = \sup\{\mu(\emptyset)\colon \mu \in \mathcal{D}\} = 0$.
+
+\noindent
+\textbf{Ισχυρισμός.} Έστω τώρα πεπερασμένη ακολουθία $(A_i)_{i = 1}^n, n \in \mathbb{N}$. Τότε $\nu(\bigcup_{i=1}^n A_i) = \sum_{i=1}^n A_i$.
+
+Θα δείξω ότι $\sup\{\sum_{i = 1}^\infty \mu(A_i)\colon \mu \in \mathcal{D}\} \leq \sum_{i=1}^\infty \sup\{\mu(A_i)\colon \mu \in \mathcal{D}\}$.
+Έστω αυθαίρετο $\epsilon > 0$. Έστω η ακολουθία $\epsilon_n = \frac{\epsilon}{2^n}$. Θα δείξω ότι $\sup\{\sum_{i = 1}^\infty \mu(A_i)\colon \mu \in \mathcal{D}\} - \epsilon \leq \sum_{i=1}^\infty \sup\{\mu(A_i)\colon \mu \in \mathcal{D}\} + \epsilon$. Έστω για κάθε $i$ το μέτρο $\mu_i \in \mathcal{D}$ τέτοιο ώστε $\mu_i(A_i) > \sup\{\mu(A_i)\colon \mu \in \mathcal{A}\} - \epsilon_i$, το οποίο θα υπάρχει από τον ορισμό του $\sup$. Τώρα έχω ότι $\sum_{i=1}^\infty \sup\{\mu(A_i)\colon \mu \in \mathcal{D}\} < \sum_{i = 1}^\infty \mu_i(A_i) + \epsilon$.
+
+Για τυχόν $n$ θα υπάρχει $\mu_n \in \mathcal{D}$ τέτοιο ώστε $\mu_n(A_n) + \epsilon_n > \sup\{\mu(A_n)\colon \mu \in \mathcal{D}\}$. Τότε $\sum_{n=1}^\infty \mu_n(A_n) + \epsilon_n > \sum_{n=1}^\infty \sup\{\mu(A_n)\colon \mu \in \mathcal{D}\}$.
+
+Εξετάζω το $\sum_{n=1}^\infty \mu(A_n)$.
+
+\begin{align*}
+\sup\{\sum_{i = 1}^\infty \mu(A_i): \mu \in \mathcal{D}\}\\
+\sum_{i = 1}^\infty \sup\{\mu(A_i): \mu \in \mathcal{D}\}\\
+\end{align*}
+\end{proof}
+
+\end{document}
